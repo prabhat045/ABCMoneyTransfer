@@ -1,0 +1,90 @@
+﻿@model ABCMoneyTransfer.DTOs.TransferViewModel
+@{
+    ViewData["Title"] = "Transfer Money";
+}
+<h2>Transfer Money from Malaysia to Nepal</h2>
+
+@if (TempData["TransferSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["TransferSuccess"]</div>
+}
+
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Receiver Info</h4>
+            <div class="form-group">
+                <label asp-for="ReceiverFirstName"></label>
+                <input asp-for="ReceiverFirstName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiverMiddleName"></label>
+                <input asp-for="ReceiverMiddleName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiverLastName"></label>
+                <input asp-for="ReceiverLastName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiverAddress"></label>
+                <input asp-for="ReceiverAddress" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiverCountry"></label>
+                <select asp-for="ReceiverCountry" class="form-control">
+                    <option value="Nepal" selected>Nepal</option>
+                </select>
+                <span asp-validation-for="ReceiverCountry" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <h4>Bank Info</h4>
+            <div class="form-group">
+                <label asp-for="BankName"></label>
+                <input asp-for="BankName" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNumber"></label>
+                <input asp-for="AccountNumber" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Transfer Details</h4>
+            <div class="form-group">
+                <label asp-for="TransferAmountMYR"></label>
+                <input asp-for="TransferAmountMYR" type="number" step="0.01" class="form-control" required />
+            </div>
+
+            <input type="hidden" asp-for="ExchangeRate" id="ExchangeRate" />
+
+            <div class="form-group">
+                <label>Current Exchange Rate (MYR → NPR):</label>
+                <p id="exchangeRateDisplay">@Model.ExchangeRate</p>
+            </div>
+            <div class="form-group">
+                <label>Estimated Payout (NPR):</label>
+                <p id="payoutAmount">@((Model.TransferAmountMYR * Model.ExchangeRate).ToString("F2"))</p>
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Transfer</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var rateValue = document.getElementById("exchangeRateDisplay").innerText;
+            document.getElementById("ExchangeRate").value = rateValue;
+
+            var transferInput = document.querySelector('input[name="TransferAmountMYR"]');
+            transferInput.addEventListener('input', function () {
+                var rate = parseFloat(document.getElementById("ExchangeRate").value) || 0;
+                var amount = parseFloat(transferInput.value) || 0;
+                document.getElementById("payoutAmount").innerText = (rate * amount).toFixed(2);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>Dashboard</h2>
+
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Transfer Money</h3>
+            <p>Initiate a money transfer.</p>
+            <a class="btn btn-primary" asp-controller="Transfer" asp-action="Create">Go to Transfer</a>
+        </div>
+        <div class="col-md-6">
+            <h3>Transaction Report</h3>
+            <p>View your transaction reports.</p>
+            <a class="btn btn-primary" asp-controller="Transactions" asp-action="Report">View Report</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+}

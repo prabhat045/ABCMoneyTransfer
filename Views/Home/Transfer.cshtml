@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Transfer Money";
+}
+
+<h2>Transfer Money</h2>
+
+<form method="post" asp-controller="Transactions" asp-action="Transfer">
+    <!-- Sender Information -->
+    <div class="form-group">
+        <label>Sender First Name:</label>
+        <input name="Sender.FirstName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Sender Middle Name:</label>
+        <input name="Sender.MiddleName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Sender Last Name:</label>
+        <input name="Sender.LastName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Sender Address:</label>
+        <input name="Sender.Address" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Sender Country:</label>
+        <input name="Sender.Country" class="form-control" required />
+    </div>
+
+    <!-- Receiver Information -->
+    <div class="form-group">
+        <label>Receiver First Name:</label>
+        <input name="Receiver.FirstName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Receiver Middle Name:</label>
+        <input name="Receiver.MiddleName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Receiver Last Name:</label>
+        <input name="Receiver.LastName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Receiver Address:</label>
+        <input name="Receiver.Address" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Receiver Country:</label>
+        <input name="Receiver.Country" class="form-control" required />
+    </div>
+
+    <!-- Payment Details -->
+    <div class="form-group">
+        <label>Bank Name:</label>
+        <input name="PaymentDetail.BankName" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label>Account Number:</label>
+        <input name="PaymentDetail.AccountNumber" class="form-control" required pattern="\d{10,20}" title="10-20 digits" />
+    </div>
+
+    <!-- Transfer Amount -->
+    <div class="form-group">
+        <label>Transfer Amount (MYR):</label>
+        <input type="number" step="0.01" name="TransferAmount" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Transfer</button>
+</form>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ABCMoneyTransfer.DTOs.TransactionDTO>
+
+@{
+    ViewData["Title"] = "Transaction Report";
+}
+<h2>Transaction Report</h2>
+
+<!-- Filter Form -->
+<form method="get" asp-controller="Transactions" asp-action="Report" class="mb-4">
+    <!-- Hidden field to signal we want to show the report -->
+    <input type="hidden" name="showReport" value="true" />
+
+    <div class="row">
+        <div class="col-md-3">
+            <label for="StartDate">Start Date:</label>
+            <input type="date" name="StartDate" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label for="EndDate">End Date:</label>
+            <input type="date" name="EndDate" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label for="PageNumber">Page Number:</label>
+            <input type="number" name="PageNumber" value="1" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label for="PageSize">Page Size:</label>
+            <input type="number" name="PageSize" value="10" class="form-control" />
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </div>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <!-- If data is available, display each transaction in a 3-column table -->
+    @foreach (var tx in Model)
+    {
+        <table class="table table-bordered mb-4">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Payment Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>First Name: @tx.Sender.FirstName</td>
+                    <td>First Name: @tx.Receiver.FirstName</td>
+                    <td>Bank Name: @tx.BankName</td>
+                </tr>
+                <tr>
+                    <td>Middle Name: @tx.Sender.MiddleName</td>
+                    <td>Middle Name: @tx.Receiver.MiddleName</td>
+                    <td>Account Number: @tx.AccountNumber</td>
+                </tr>
+                <tr>
+                    <td>Last Name: @tx.Sender.LastName</td>
+                    <td>Last Name: @tx.Receiver.LastName</td>
+                    <td>Transfer Amount (MYR): @tx.TransferAmount</td>
+                </tr>
+                <tr>
+                    <td>Address: @tx.Sender.Address</td>
+                    <td>Address: @tx.Receiver.Address</td>
+                    <td>Exchange Rate: @tx.ExchangeRate</td>
+                </tr>
+                <tr>
+                    <td>Country: @tx.Sender.Country</td>
+                    <td>Country: @tx.Receiver.Country</td>
+                    <td>Payout (NPR): @tx.PayoutAmount</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        Tx ID: @tx.TransactionId | Date: @tx.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+else
+{
+    <p>No transactions found. Please fill out the filters and click "Generate Report".</p>
+}
