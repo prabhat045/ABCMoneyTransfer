@@ -10,9 +10,9 @@ namespace ABCMoneyTransfer.Controllers
     [Authorize]
     public class TransactionsController : Controller
     {
-        private readonly TransactionService _transactionService;
+        private readonly ITransactionService _transactionService;
 
-        public TransactionsController(TransactionService transactionService)
+        public TransactionsController(ITransactionService transactionService)
         {
             _transactionService = transactionService;
         }

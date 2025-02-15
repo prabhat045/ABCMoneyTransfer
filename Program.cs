@@ -66,7 +66,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<IExchangeRateService, ExchangeRateService>();
 builder.Services.AddScoped<IExchangeRateService, ExchangeRateService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<TransactionService>();
+builder.Services.AddScoped<ITransactionService,TransactionService>();
 
 var app = builder.Build();
 

@@ -10,10 +10,10 @@ namespace ABCMoneyTransfer.Controllers
     [Authorize]
     public class TransferController : Controller
     {
-        private readonly TransactionService _transactionService;
+        private readonly ITransactionService _transactionService;
         private readonly IExchangeRateService _exchangeRateService;
 
-        public TransferController(TransactionService transactionService, IExchangeRateService exchangeRateService)
+        public TransferController(ITransactionService transactionService, IExchangeRateService exchangeRateService)
         {
             _transactionService = transactionService;
             _exchangeRateService = exchangeRateService;

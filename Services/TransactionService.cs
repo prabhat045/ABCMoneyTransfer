@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ABCMoneyTransfer.Services
 {
-    public class TransactionService
+    public class TransactionService : ITransactionService
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
