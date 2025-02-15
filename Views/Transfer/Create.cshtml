@@ -2,12 +2,15 @@
 @{
     ViewData["Title"] = "Transfer Money";
 }
+
 <h2>Transfer Money from Malaysia to Nepal</h2>
 
 @if (TempData["TransferSuccess"] != null)
 {
     <div class="alert alert-success">@TempData["TransferSuccess"]</div>
 }
+
+<div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="Create" method="post">
     <div class="row">
@@ -16,18 +19,22 @@
             <div class="form-group">
                 <label asp-for="ReceiverFirstName"></label>
                 <input asp-for="ReceiverFirstName" class="form-control" required />
+                <span asp-validation-for="ReceiverFirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReceiverMiddleName"></label>
-                <input asp-for="ReceiverMiddleName" class="form-control" required />
+                <input asp-for="ReceiverMiddleName" class="form-control" />
+                <span asp-validation-for="ReceiverMiddleName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReceiverLastName"></label>
                 <input asp-for="ReceiverLastName" class="form-control" required />
+                <span asp-validation-for="ReceiverLastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReceiverAddress"></label>
                 <input asp-for="ReceiverAddress" class="form-control" required />
+                <span asp-validation-for="ReceiverAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReceiverCountry"></label>
@@ -36,7 +43,6 @@
                 </select>
                 <span asp-validation-for="ReceiverCountry" class="text-danger"></span>
             </div>
-
         </div>
 
         <div class="col-md-4">
@@ -44,10 +50,12 @@
             <div class="form-group">
                 <label asp-for="BankName"></label>
                 <input asp-for="BankName" class="form-control" required />
+                <span asp-validation-for="BankName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AccountNumber"></label>
                 <input asp-for="AccountNumber" class="form-control" required />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
             </div>
         </div>
 
@@ -56,6 +64,7 @@
             <div class="form-group">
                 <label asp-for="TransferAmountMYR"></label>
                 <input asp-for="TransferAmountMYR" type="number" step="0.01" class="form-control" required />
+                <span asp-validation-for="TransferAmountMYR" class="text-danger"></span>
             </div>
 
             <input type="hidden" asp-for="ExchangeRate" id="ExchangeRate" />
@@ -74,6 +83,9 @@
 </form>
 
 @section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var rateValue = document.getElementById("exchangeRateDisplay").innerText;

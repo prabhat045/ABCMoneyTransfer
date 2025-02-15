@@ -10,7 +10,7 @@ namespace ABCMoneyTransfer.DTOs
         public string AccountNumber { get; set; }
 
         [Required]
-        [Range(0.01, double.MaxValue)]
+        [Range(100.01, double.MaxValue, ErrorMessage = "Transfer amount must be greater than 100.")]
         public decimal TransferAmount { get; set; }
 
         [Required]

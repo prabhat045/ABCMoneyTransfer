@@ -1,6 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+		<OutputPath>wwwroot\ABCMoneyTransferApp\</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<OutputPath>wwwroot\ABCMoneyTransferApp\</OutputPath>
+	</PropertyGroup>
+
+
+
+	<PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
